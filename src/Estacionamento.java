@@ -1,9 +1,14 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Estacionamento {
 
     private ArrayList<RegistroEntrada> registros;
     private ArrayList <RegistroEntrada> historico;
+    private ArrayList <RegistroSaida> historicoSaidas;
+    private ArrayList <Mensalista> mensalistas;
+
+    private Scanner scanner = new Scanner (System.in);
 
     private final int LIMITE_CARROS = 60;
     private final int LIMITE_MOTOS = 20;
@@ -13,7 +18,9 @@ public class Estacionamento {
     public Estacionamento(){
         registros  = new ArrayList<>();
         historico = new ArrayList<>();
-    }
+        historicoSaidas = new ArrayList<>();
+        mensalistas = new ArrayList<>();
+    };
 
     // Contar veiculos ativos de um determinado tipo
 
@@ -123,6 +130,80 @@ public class Estacionamento {
 
             long minutos = duracao.toMinutes();
 
+            // Implementando a calculadora ao estacionamento
+
+           Mensalista mensalista = buscarMensalista(placa);
+
+           double valor;
+
+           if (mensalista != null && !mensalista.estaEmAtraso()) {
+               valor = 0.0;
+          } else {
+                  valor = Calculadora.calcularValor(
+                registroEncontrado.getVeiculo(), minutos);
+    }
+            
+            int opcao = 0;
+            boolean pagamentoValido = false;
+
+             while(!pagamentoValido){
+
+                
+
+            System.out.println("\n=== FORMA DE PAGAMENTO ===");
+            System.out.println("1 - Dinheiro");
+            System.out.println("2 - Pix");
+            System.out.println("3 - Cartao");
+            System.out.print("Escolha uma opcao: ");
+
+            
+
+           try {
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+
+            if (opcao >= 1 && opcao <= 3){
+                pagamentoValido = true;
+            }
+            else {
+                System.out.println("Opção invalida! escolha 1,2 ou 3.");
+            }
+
+       } catch (java.util.InputMismatchException erro) {
+
+    System.out.println("Erro: digite apenas numeros!");
+
+         scanner.nextLine();
+         }
+        }
+
+
+           String formaPagamento;
+
+           switch (opcao) {
+    case 1:
+        formaPagamento = "Dinheiro";
+        break;
+
+    case 2:
+        formaPagamento = "Pix";
+        break;
+
+    case 3:
+        formaPagamento = "Cartao";
+        break;
+
+    default:
+        formaPagamento = "Invalido";
+        System.out.println("Opcao invalida!");
+        break;
+}
+
+            RegistroSaida saida = new RegistroSaida(
+                registroEncontrado, horaSaida, minutos, valor, formaPagamento);
+
+            historicoSaidas.add(saida);
+
             System.out.println("\n=== SAIDA DO VEICULO ===");
 
             System.out.println("Placa: " + placa);
@@ -135,6 +216,8 @@ public class Estacionamento {
             System.out.println("Tempo estacionado: "
             + minutos + " minutos");
 
+            System.out.printf("Valor a pagar: R$ %.2f%n", valor);
+
             // liberar vaga
 
             registros.remove(registroEncontrado);
@@ -144,6 +227,71 @@ public class Estacionamento {
 
         
         }
+
+        public void exibirHistoricoSaidas() {
+        System.out.println("\n=== HISTORICO DE SAIDAS ===");
+
+        if (historicoSaidas.isEmpty()) {
+        System.out.println("Nenhuma saida registrada.");
+        return;
+    }
+
+        for (RegistroSaida saida : historicoSaidas) {
+             saida.exibirRegistroSaida();
+    }
+}
+
+public void exibirVagasDisponiveis(){
+    
+    int carrosOcupados = contarVeiculos(Carro.class);
+    int motosOcupadas = contarVeiculos(Moto.class);
+
+    int carrosDisponiveis = LIMITE_CARROS - carrosOcupados;
+    int motosDisponiveis = LIMITE_MOTOS - motosOcupadas;
+
+    System.out.println("\n==== VAGAS DISPONIVEIS ====");
+
+    System.out.println("Carros ocupados: " + carrosOcupados);
+    System.out.println("Vagas para carros: " + carrosDisponiveis);
+
+    System.out.println("Motos ocupadas: " + motosOcupadas);
+   
+    System.out.println("Vagas para motos: " + motosDisponiveis);
+}
+
+
+public void cadastrarMensalista(String nome, String telefone, String placa, java.time.LocalDate dataVencimento) {
+
+    for (Mensalista mensalista : mensalistas) {
+        if (mensalista.getPlaca().equalsIgnoreCase(placa)) {
+            System.out.println("Ja existe um mensalista cadastrado com essa placa!");
+            return;
+        }
+    }
+
+    Mensalista novoMensalista = new Mensalista(nome, telefone, placa, dataVencimento);
+
+    mensalistas.add(novoMensalista);
+
+    System.out.println("Mensalista cadastrado com sucesso!");
+    System.out.println("Nome: " + nome);
+    System.out.println("Telefone: " + telefone);
+    System.out.println("Placa: " + placa);
+    System.out.println("Vencimento: " + dataVencimento);
+}
+
+public Mensalista buscarMensalista(String placa) {
+
+    for (Mensalista mensalista : mensalistas) {
+        if (mensalista.getPlaca().equalsIgnoreCase(placa)) {
+            return mensalista;
+        }
+    }
+
+    return null;
+}
+
+
 
     
 
