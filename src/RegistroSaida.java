@@ -2,44 +2,43 @@ import java.time.LocalDateTime;
 
 public class RegistroSaida {
 
-    private RegistroEntrada registroEntrada;
-    private LocalDateTime dataHoraSaida;
-    private long minutosEstacionado;
-    private double valorPago;
-    private String formaPagamento;
+  private RegistroEntrada registroEntrada;
+  private LocalDateTime dataHoraSaida;
+  private long minutosEstacionado;
+  private double valorPago;
+  private String formaPagamento;
 
-    public RegistroSaida(RegistroEntrada registroEntrada,
-                        LocalDateTime dataHoraSaida,
-                        long minutosEstacionado,
-                        double valorPago,
-                      String formaPagamento){
-            
+  public RegistroSaida(RegistroEntrada registroEntrada,
+      LocalDateTime dataHoraSaida,
+      long minutosEstacionado,
+      double valorPago,
+      String formaPagamento) {
 
-     this.registroEntrada = registroEntrada;
-     this.dataHoraSaida = dataHoraSaida;
-     this.minutosEstacionado = minutosEstacionado;
-     this.valorPago = valorPago;     
-     this.formaPagamento = formaPagamento;
+    this.registroEntrada = registroEntrada;
+    this.dataHoraSaida = dataHoraSaida;
+    this.minutosEstacionado = minutosEstacionado;
+    this.valorPago = valorPago;
+    this.formaPagamento = formaPagamento;
 
   }
 
-  public RegistroEntrada getRegistroEntrada(){
+  public RegistroEntrada getRegistroEntrada() {
     return registroEntrada;
   }
 
-  public LocalDateTime getDataHoraSaida(){
+  public LocalDateTime getDataHoraSaida() {
     return dataHoraSaida;
   }
 
-  public long getMinutosEstacionado(){
+  public long getMinutosEstacionado() {
     return minutosEstacionado;
   }
 
-  public double getValorPago(){
+  public double getValorPago() {
     return valorPago;
   }
 
-  public String getFormaPagamento(){
+  public String getFormaPagamento() {
     return formaPagamento;
   }
 
@@ -60,7 +59,6 @@ public class RegistroSaida {
 
     System.out.println("Forma de pagamento: " + formaPagamento);
 
-   
-}
-    
+  }
+
 }

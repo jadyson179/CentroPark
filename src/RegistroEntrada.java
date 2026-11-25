@@ -22,6 +22,10 @@ public class RegistroEntrada {
         return dataHoraEntrada;
     }
 
+    public String getCodigo() {
+    return codigo;
+}
+
     //exibir informações
     public void exibirRegistro(){
         System.out.println("Código: " + codigo);

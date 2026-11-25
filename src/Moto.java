@@ -1,19 +1,24 @@
 public class Moto extends Veiculos {
 
-    public Moto (String placa){
+    private static double valorPrimeiraHora = 4.00;
+    private static double valorHoraAdicional = 2.00;
+
+    public Moto(String placa) {
         super(placa, "Moto");
     }
 
-    @Override 
-
-    public double calcularPrimeiraHora(){
-        return 4.00;
+    @Override
+    public double calcularPrimeiraHora() {
+        return valorPrimeiraHora;
     }
 
-    @Override 
-
-    public double calcularHoraAdicional(){
-        return 2.00;
+    @Override
+    public double calcularHoraAdicional() {
+        return valorHoraAdicional;
     }
-    
+
+    public static void alterarTarifas(double primeiraHora, double adicional) {
+        valorPrimeiraHora = primeiraHora;
+        valorHoraAdicional = adicional;
+    }
 }
