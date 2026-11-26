@@ -1,10 +1,12 @@
-public class Moto extends Veiculos {
+package model;
 
-    private static double valorPrimeiraHora = 4.00;
-    private static double valorHoraAdicional = 2.00;
+public class Carro extends Veiculos {
 
-    public Moto(String placa) {
-        super(placa, "Moto");
+    private static double valorPrimeiraHora = 8.00;
+    private static double valorHoraAdicional = 3.00;
+
+    public Carro(String placa) {
+        super(placa, "Carro");
     }
 
     @Override

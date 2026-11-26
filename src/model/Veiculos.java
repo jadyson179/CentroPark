@@ -1,4 +1,6 @@
-public  abstract class Veiculos {
+package model;
+
+public abstract class Veiculos {
 
     // Atributos do veiculo
 
@@ -7,7 +9,7 @@ public  abstract class Veiculos {
 
     // contrutor
 
-    public Veiculos(String placa, String tipo){
+    public Veiculos(String placa, String tipo) {
 
         this.placa = placa;
         this.tipo = tipo;
@@ -16,40 +18,39 @@ public  abstract class Veiculos {
 
     // Getter e setter
 
-    public String getPlaca(){
+    public String getPlaca() {
         return placa;
     }
 
-    public void setPlaca(String placa){
-        if (placa != null && !placa.trim().isEmpty()){
+    public void setPlaca(String placa) {
+        if (placa != null && !placa.trim().isEmpty()) {
             this.placa = placa;
-        }
-        else {
+        } else {
             System.out.println("Placa inválida!");
         }
 
     }
 
-    public String getTipo(){
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(String tipo){
+    public void setTipo(String tipo) {
         this.tipo = tipo;
 
     }
 
     // Mostrar dados
 
-    public void exibirDados(){
+    public void exibirDados() {
         System.out.println("Placa: " + placa);
         System.out.println("Tipo: " + tipo);
     }
 
-    // Metodos abstratos 
+    // Metodos abstratos
 
     public abstract double calcularPrimeiraHora();
-    
+
     public abstract double calcularHoraAdicional();
-    
+
 }

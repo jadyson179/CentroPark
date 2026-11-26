@@ -1,3 +1,5 @@
+package model;
+
 import java.time.LocalDateTime;
 
 public class RegistroEntrada {
@@ -6,7 +8,7 @@ public class RegistroEntrada {
     private Veiculos veiculo;
     private LocalDateTime dataHoraEntrada;
 
-    public RegistroEntrada(String codigo, Veiculos veiculo ){
+    public RegistroEntrada(String codigo, Veiculos veiculo) {
         this.codigo = codigo;
         this.veiculo = veiculo;
         this.dataHoraEntrada = LocalDateTime.now();
@@ -14,23 +16,23 @@ public class RegistroEntrada {
 
     // Getters
 
-    public Veiculos getVeiculo(){
+    public Veiculos getVeiculo() {
         return veiculo;
     }
 
-    public LocalDateTime getDataHoraEntrada(){
+    public LocalDateTime getDataHoraEntrada() {
         return dataHoraEntrada;
     }
 
     public String getCodigo() {
-    return codigo;
-}
+        return codigo;
+    }
 
-    //exibir informações
-    public void exibirRegistro(){
+    // exibir informações
+    public void exibirRegistro() {
         System.out.println("Código: " + codigo);
         veiculo.exibirDados();
         System.out.println("Data e hora: " + dataHoraEntrada);
-        
+
     }
 }

@@ -2,6 +2,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
+import controller.Estacionamento;
+import model.*;
+
 public class App {
 
     public static void main(String[] args) {
